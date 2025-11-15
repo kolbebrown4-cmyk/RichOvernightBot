@@ -1,54 +1,33 @@
-import "./App.css";
-import { TonConnectButton } from "@tonconnect/ui-react";
-import { Counter } from "./components/Counter";
-import { Jetton } from "./components/Jetton";
-import { TransferTon } from "./components/TransferTon";
-import styled from "styled-components";
-import { Button, FlexBoxCol, FlexBoxRow } from "./components/styled/styled";
-import { useTonConnect } from "./hooks/useTonConnect";
-import { CHAIN } from "@tonconnect/protocol";
-import "@twa-dev/sdk";
+import React, { useState } from 'react';
+import { init, TON_CONNECT_UI } from '@tonconnect/ui-react';
 
-const StyledApp = styled.div`
-  background-color: #e8e8e8;
-  color: black;
-
-  @media (prefers-color-scheme: dark) {
-    background-color: #222;
-    color: white;
-  }
-  min-height: 100vh;
-  padding: 20px 20px;
-`;
-
-const AppContainer = styled.div`
-  max-width: 900px;
-  margin: 0 auto;
-`;
+init('https://app.tonkeeper.com/ton-connect');
 
 function App() {
-  const { network } = useTonConnect();
+  const [balance, setBalance] = useState(0);
+  const [taps, setTaps] = useState(0);
+
+  const handleTap = () => {
+    setTaps(taps + 1);
+    setBalance(balance + 1); // Earn 1 $AGENT per tap
+  };
+
+  const connectWallet = () => {
+    TON_CONNECT_UI.openModal();
+  };
 
   return (
-    <StyledApp>
-      <AppContainer>
-        <FlexBoxCol>
-          <FlexBoxRow>
-            <TonConnectButton />
-            <Button>
-              {network
-                ? network === CHAIN.MAINNET
-                  ? "mainnet"
-                  : "testnet"
-                : "N/A"}
-            </Button>
-          </FlexBoxRow>
-          <Counter />
-          <TransferTon />
-          <Jetton />
-        </FlexBoxCol>
-      </AppContainer>
-    </StyledApp>
+    <div style={{ textAlign: 'center', padding: '20px' }}>
+      <h1>Tap to Train Your AI Agent! 🚀</h1>
+      <p>Balance: {balance} $AGENT</p>
+      <p>Taps: {taps}</p>
+      <button onClick={handleTap} style={{ fontSize: '24px', padding: '10px' }}>
+        TAP TO EARN
+      </button>
+      <br /><br />
+      <button onClick={connectWallet}>Connect TON Wallet</button>
+      <p>Refer a friend: +500 $AGENT</p>
+    </div>
   );
 }
 
