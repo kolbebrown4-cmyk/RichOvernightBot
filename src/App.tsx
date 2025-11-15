@@ -6,32 +6,28 @@ function App() {
 
   const handleTap = () => {
     setTaps(taps + 1);
-    setBalance(balance + 10); // 10 $AGENT per tap
+    setBalance(balance + 100); // 100 $RICH per tap
+  };
+
+  const shareLink = () => {
+    const text = `Get rich overnight! 🚀\n\nTap to earn $RICH tokens!\n\nPlay now: t.me/GetRichOvernightBot`;
+    window.open(`https://t.me/share/url?url=&text=${encodeURIComponent(text)}`);
   };
 
   return (
-    <div style={{ textAlign: 'center', padding: '30px', fontFamily: 'Arial' }}>
-      <h1>🚀 AI Agent Tap-to-Earn</h1>
-      <p>Balance: <strong>{balance} $AGENT</strong></p>
-      <p>Taps: {taps}</p>
-      <button 
-        onClick={handleTap}
-        style={{
-          fontSize: '32px',
-          padding: '20px 40px',
-          margin: '20px',
-          borderRadius: '20px',
-          background: '#00D4FF',
-          border: 'none',
-          color: 'white'
-        }}
-      >
-        TAP TO EARN
-      </button>
-      <p>Refer friends: +500 $AGENT each!</p>
-      <p>Airdrop in 30 days on TON</p>
-    </div>
-  );
-}
+    <div style={{ 
+      textAlign: 'center', 
+      padding: '30px', 
+      fontFamily: 'Arial', 
+      background: 'linear-gradient(135deg, #1a1a2e, #16213e)', 
+      color: 'white', 
+      minHeight: '100vh' 
+    }}>
+      <h1 style={{ fontSize: '28px', marginBottom: '10px' }}>💰 GetRichOvernightBot</h1>
+      <p style={{ fontSize: '18px', margin: '5px' }}>Tap to earn $RICH tokens!</p>
 
-export default App;
+      <div style={{ margin: '30px 0' }}>
+        <p style={{ fontSize: '36px', fontWeight: 'bold', margin: '10px 0' }}>
+          {balance.toLocaleString()} $RICH
+        </p>
+        <p style={{ color: '#00​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​
